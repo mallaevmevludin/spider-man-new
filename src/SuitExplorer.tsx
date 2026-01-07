@@ -6,7 +6,7 @@ import { Shield, Zap, Target, Cpu, Layers, Terminal } from 'lucide-react';
 
 export const SuitExplorer: React.FC = () => {
   const { suitSpecs, accentColor, heroImage, theme } = useSpiderTheme();
-  const { playHover } = useSpiderAudio();
+  const { playHover, playClick } = useSpiderAudio();
   const [activeSpec, setActiveSpec] = useState<string | null>(null);
   const [liveData, setLiveData] = useState<string[]>([]);
   
