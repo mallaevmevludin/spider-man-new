@@ -60,21 +60,21 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
             { 
               name: 'Зеленый Гоблин', 
               description: 'Норман Озборн, первый и самый опасный враг.', 
-              image: 'https://images.unsplash.com/photo-1620336655055-088d06e36bf0?w=800&q=80',
+              image: '/goblin.webp',
               powers: ['Сверхчеловеческая сила', 'Регенерация', 'Высокий интеллект', 'Глайдер и бомбы-тыквы'],
               firstAppearance: 'The Amazing Spider-Man #14 (1964)'
             },
             { 
               name: 'Доктор Октопус', 
               description: 'Отто Октавиус, гений с четырьмя щупальцами.', 
-              image: 'https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=800&q=80',
+              image: '/octopus.jpg',
               powers: ['Гениальный интеллект', 'Телепатическое управление щупальцами', 'Механические конечности'],
               firstAppearance: 'The Amazing Spider-Man #3 (1963)'
             },
             { 
               name: 'Веном', 
               description: 'Инопланетный симбиот, жаждущий мести.', 
-              image: 'https://cdn.pixabay.com/photo/2024/01/26/15/42/venom-8534168_1280.jpg',
+              image: '/venom.jpg',
               powers: ['Все способности Человека-паука', 'Смена формы', 'Невидимость для паучьего чутья'],
               firstAppearance: 'The Amazing Spider-Man #300 (1988)'
             },
@@ -105,21 +105,21 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
             { 
               name: 'Ящер', 
               description: 'Доктор Коннорс, мечтавший о регенерации.', 
-              image: 'https://images.unsplash.com/photo-1501432377862-3d0432b87a14?w=800&q=80',
+              image: '/yasher.jpg',
               powers: ['Сверхчеловеческая сила', 'Регенерация хвоста', 'Управление рептилиями'],
               firstAppearance: 'The Amazing Spider-Man #6 (1963)'
             },
             { 
               name: 'Электро', 
               description: 'Макс Диллон, повелитель электричества.', 
-              image: 'https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=800&q=80',
+              image: '/electro.webp',
               powers: ['Генерация электричества', 'Полет по линиям электропередач', 'Электростатическое притяжение'],
               firstAppearance: 'The Amazing Spider-Man #9 (1964)'
             },
             { 
               name: 'Зеленый Гоблин', 
               description: 'Гарри Озборн в поисках исцеления.', 
-              image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&q=80',
+              image: '/garry-osborn.jpg',
               powers: ['Глайдер', 'Высокие технологии', 'Улучшенная сыворотка'],
               firstAppearance: 'The Amazing Spider-Man #31 (1965)'
             },
@@ -149,21 +149,21 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
             { 
               name: 'Стервятник', 
               description: 'Эдриан Тумс, использующий инопланетные технологии.', 
-              image: 'https://images.unsplash.com/photo-1620336655055-088d06e36bf0?w=800&q=80',
+              image: '/srervyatnik.webp',
               powers: ['Механические крылья', 'Высокотехнологичный костюм', 'Оружие Читаури'],
               firstAppearance: 'The Amazing Spider-Man #2 (1963)'
             },
             { 
               name: 'Мистерио', 
               description: 'Мастер иллюзий и обмана Квентин Бек.', 
-              image: 'https://images.unsplash.com/photo-1534809027769-b00d750a6bac?w=800&q=80',
+              image: '/misterio.jpg',
               powers: ['Дроны-иллюзионисты', 'Мастер спецэффектов', 'Тактический гений'],
               firstAppearance: 'The Amazing Spider-Man #13 (1964)'
             },
             { 
               name: 'Крейвен-охотник', 
               description: 'Охотник, ищущий самую ценную добычу.', 
-              image: 'https://images.unsplash.com/photo-1501432377862-3d0432b87a14?w=800&q=80',
+              image: '/kreyven.webp',
               powers: ['Мастер рукопашного боя', 'Усиленные чувства', 'Мастерство выслеживания'],
               firstAppearance: 'The Amazing Spider-Man #15 (1964)'
             },

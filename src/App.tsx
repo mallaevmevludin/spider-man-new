@@ -202,9 +202,9 @@ export default function App() {
           >
             <div className="w-full h-full rounded-full bg-slate-800 overflow-hidden relative">
                <img 
-                 src={t === 'mcu' ? 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=100' : 
-                      t === 'tobey' ? 'https://images.unsplash.com/photo-1534809027769-b00d750a6bac?w=100' : 
-                      'https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=100'} 
+                 src={t === 'mcu' ? '/misterio.jpg' : 
+                      t === 'tobey' ? '/goblin.webp' : 
+                      '/electro.webp'} 
                  className={`w-full h-full object-cover transition-all duration-500 ${theme === t ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
                />
             </div>
