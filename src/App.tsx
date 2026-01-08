@@ -34,12 +34,15 @@ export default function App() {
 
     // Auto-play audio on first interaction
     const startAudio = (e: MouseEvent | TouchEvent) => {
-      // If the user clicked the mute button, we don't want to force-enable audio
+      // Once the user has interacted, we remove the listeners regardless
+      window.removeEventListener('click', startAudio as any);
+      window.removeEventListener('touchstart', startAudio as any);
+
+      // If the user clicked a button (like the mute button), we don't force-enable audio
+      // because they might be trying to keep it off or choosing their own setting.
       if ((e.target as HTMLElement).closest('button')) return;
 
       setIsAudioOn(true);
-      window.removeEventListener('click', startAudio as any);
-      window.removeEventListener('touchstart', startAudio as any);
     };
     window.addEventListener('click', startAudio as any);
     window.addEventListener('touchstart', startAudio as any);
