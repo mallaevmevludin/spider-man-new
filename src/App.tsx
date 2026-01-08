@@ -21,6 +21,7 @@ export default function App() {
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [audioWasOnBeforeTrailer, setAudioWasOnBeforeTrailer] = useState(false);
 
   useEffect(() => {
     // Smooth scroll
@@ -32,18 +33,21 @@ export default function App() {
     requestAnimationFrame(raf);
 
     // Auto-play audio on first interaction
-    const startAudio = () => {
+    const startAudio = (e: MouseEvent | TouchEvent) => {
+      // If the user clicked the mute button, we don't want to force-enable audio
+      if ((e.target as HTMLElement).closest('button')) return;
+
       setIsAudioOn(true);
-      window.removeEventListener('click', startAudio);
-      window.removeEventListener('touchstart', startAudio);
+      window.removeEventListener('click', startAudio as any);
+      window.removeEventListener('touchstart', startAudio as any);
     };
-    window.addEventListener('click', startAudio);
-    window.addEventListener('touchstart', startAudio);
+    window.addEventListener('click', startAudio as any);
+    window.addEventListener('touchstart', startAudio as any);
 
     return () => {
       lenis.destroy();
-      window.removeEventListener('click', startAudio);
-      window.removeEventListener('touchstart', startAudio);
+      window.removeEventListener('click', startAudio as any);
+      window.removeEventListener('touchstart', startAudio as any);
     };
   }, [setIsAudioOn]);
 
@@ -165,6 +169,7 @@ export default function App() {
                 onMouseEnter={playHover}
                 onClick={() => { 
                   handlePlayThwip(); 
+                  setAudioWasOnBeforeTrailer(isAudioOn);
                   setIsTrailerOpen(true); 
                   setIsAudioOn(false); // Pause background music when trailer starts
                 }}
@@ -216,7 +221,12 @@ export default function App() {
       <div className="fixed left-8 bottom-8 z-50 flex gap-4">
         <button 
           onMouseEnter={playHover}
-          onClick={() => { playClick(); setIsAudioOn(!isAudioOn); }}
+          onClick={(e) => { 
+            e.stopPropagation();
+            const newState = !isAudioOn;
+            setIsAudioOn(newState);
+            if (newState) playClick();
+          }}
           className="glass p-4 rounded-full hover:bg-white hover:text-black transition"
         >
           {isAudioOn ? <Volume2 size={20} /> : <VolumeX size={20} />}
@@ -230,8 +240,8 @@ export default function App() {
             src="/trailer.mp4" 
             onClose={() => {
               setIsTrailerOpen(false);
-              if (isAudioOn) {
-                // Resume background music if audio was on
+              if (audioWasOnBeforeTrailer) {
+                // Resume background music if audio was on before trailer
                 setIsAudioOn(true);
               }
             }} 
