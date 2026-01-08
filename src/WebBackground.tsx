@@ -14,8 +14,9 @@ export const WebBackground: React.FC = () => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const particleCount = 60;
-    const connectionDistance = 150;
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 30 : 60;
+    const connectionDistance = isMobile ? 100 : 150;
     const mouse = { x: -1000, y: -1000 };
 
     class Particle {
@@ -132,4 +133,5 @@ export const WebBackground: React.FC = () => {
     />
   );
 };
+
 

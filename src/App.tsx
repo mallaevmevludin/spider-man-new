@@ -54,7 +54,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen text-slate-50 overflow-hidden bg-[#020617]">
+    <div className="relative min-h-screen text-slate-50 overflow-x-hidden bg-[#020617]">
       <GlitchTransition trigger={theme} />
       <AnimatePresence>
         {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}

@@ -9,7 +9,20 @@ export const SuitExplorer: React.FC = () => {
   const { playHover, playClick } = useSpiderAudio();
   const [activeSpec, setActiveSpec] = useState<string | null>(null);
   const [liveData, setLiveData] = useState<string[]>([]);
+  const infoBoxRef = useRef<HTMLDivElement>(null);
   
+  const handleSpecClick = (specId: string) => {
+    setActiveSpec(prev => prev === specId ? null : specId);
+    playClick();
+    
+    // On mobile, scroll to info box after a short delay to allow state update
+    if (window.innerWidth < 1024) {
+      setTimeout(() => {
+        infoBoxRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  };
+
   useEffect(() => {
     const lines = [
       "DECRYPTING SUIT ARCHITECTURE...",
@@ -58,7 +71,7 @@ export const SuitExplorer: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-6 relative">
+          <div className="space-y-6 relative" ref={infoBoxRef}>
             <AnimatePresence mode="wait">
               {activeSpec ? (
                 <motion.div
@@ -94,7 +107,7 @@ export const SuitExplorer: React.FC = () => {
             </AnimatePresence>
 
             {/* Live Data Feed */}
-            <div className="mt-8 md:mt-12 p-4 md:p-6 rounded-xl md:rounded-2xl bg-black/50 border border-white/5 font-mono text-[7px] md:text-[8px] space-y-1">
+            <div className="mt-8 md:mt-12 p-4 md:p-6 rounded-xl md:rounded-2xl bg-black/50 border border-white/5 font-mono text-[7px] md:text-[8px] space-y-1 hidden md:block">
               <div className="flex items-center gap-2 mb-2 text-cyan-400 opacity-60">
                 <Terminal size={10} />
                 <span className="tracking-[0.2em] uppercase">Live Data Stream</span>
@@ -121,19 +134,18 @@ export const SuitExplorer: React.FC = () => {
             {suitSpecs.map((spec) => (
               <div
                 key={spec.id}
-                onMouseEnter={() => { setActiveSpec(spec.id); playHover(); }}
-                onMouseLeave={() => setActiveSpec(null)}
-                onClick={() => { setActiveSpec(spec.id === activeSpec ? null : spec.id); playClick(); }}
-                className="absolute w-8 h-8 md:w-12 md:h-12 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group/marker"
+                onMouseEnter={() => { if (window.innerWidth >= 1024) { setActiveSpec(spec.id); playHover(); } }}
+                onClick={() => handleSpecClick(spec.id)}
+                className="absolute w-10 h-10 md:w-12 md:h-12 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group/marker flex items-center justify-center"
                 style={{ top: spec.top, left: spec.left }}
               >
                 <div className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ backgroundColor: accentColor }} />
-                <div className="relative w-full h-full rounded-full border border-white/20 transition-all duration-500 group-hover/marker:scale-125 flex items-center justify-center overflow-hidden">
+                <div className={`relative w-8 h-8 md:w-full md:h-full rounded-full border border-white/20 transition-all duration-500 flex items-center justify-center overflow-hidden ${activeSpec === spec.id ? 'scale-125 border-white/60' : 'group-hover/marker:scale-125'}`}>
                   <div className="absolute inset-0 bg-white/5 backdrop-blur-sm" />
                   <div className="relative w-1.5 h-1.5 md:w-2 md:h-2 rounded-full shadow-[0_0_10px_white]" style={{ backgroundColor: accentColor }} />
                   
                   {/* Decorative Crosshair */}
-                  <div className="absolute inset-0 opacity-0 group-hover/marker:opacity-100 transition-opacity">
+                  <div className={`absolute inset-0 transition-opacity ${activeSpec === spec.id ? 'opacity-100' : 'opacity-0 group-hover/marker:opacity-100'}`}>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-1.5 md:h-2" style={{ backgroundColor: accentColor }} />
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-1.5 md:h-2" style={{ backgroundColor: accentColor }} />
                     <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 md:w-2 h-px" style={{ backgroundColor: accentColor }} />

@@ -70,3 +70,4 @@ export const GlitchTransition: React.FC<{ trigger: any }> = ({ trigger }) => {
   );
 };
 
+

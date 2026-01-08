@@ -10,6 +10,7 @@ export const SuitHUD: React.FC = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth < 1024) return;
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 20;
       setMousePos({ x, y });
